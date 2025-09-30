@@ -130,17 +130,25 @@
         width: 90%;
       }
     }
-/* SILUET LOGO EVENT */
+
+/* Animasi gerak floating untuk logo */
+@keyframes floatLogo {
+  0% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, -48%); }
+  100% { transform: translate(-50%, -50%); }
+}
+
 .logo-bg {
   position: fixed;
   top: 50%;
   left: 50%;
   width: 60%;
-  height: auto;      /* biar rasio gambar nggak rusak */
-  opacity: 0.60;      /* tipis jadi kayak siluet */
+  height: auto;
+  opacity: 0.5;
   transform: translate(-50%, -50%);
-  z-index: -1;       /* di belakang teks */
+  z-index: -1;
   pointer-events: none;
+  animation: floatLogo 6s ease-in-out infinite;
 }
 
   </style>

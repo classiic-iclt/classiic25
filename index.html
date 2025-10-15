@@ -1,0 +1,1150 @@
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CL25</title>
+    <link rel="icon" href="cl.png" type="image/x-icon" />
+    
+    <style>
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* ===== RESET ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== GLOBAL ===== */
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1b2a4e, #0d0d1a); 
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff;
+  }
+
+
+
+  h1, h2, .navbar-title, .flip-card-front {
+    font-family: 'Marcellus SC', serif;
+  }
+
+  #loading-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 9999;
+    overflow: hidden;
+  }
+
+  #loading-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #loading-screen.fade-out {
+    animation: fadeOut 1.5s ease forwards;
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+
+
+
+  /* ===== NAVBAR ===== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+      }
+
+      /* Logo + Teks */
+      .logo-area {
+        display: flex;
+        align-items: center;
+      }
+      .logo-area img {
+        height: 80px;
+        margin-right: 10px;
+      }
+      .logo-area span {
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      /* Menu */
+      .menu a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: 0.3s;
+      }
+      .menu a:hover {
+        color: #00e0ff;
+        text-shadow: 0 0 8px #00e0ff;
+      }
+
+  /* ===== BANNER & MASKOT ===== */
+  .banner-image {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto 60px;
+    max-width: 1000px;
+    padding: 0 10px;
+  }
+  .banner-image img { width: 100%; transition: transform 0.5s ease; }
+  .banner-image img:hover { transform: scale(1.05); }
+
+.maskot-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  margin-bottom: 170px;
+  overflow: visible;
+}
+
+/* Cahaya aura di belakang */
+.maskot-container::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(138,187,208,0.4) 0%, transparent 70%);
+  z-index: 1;
+  filter: blur(30px);
+  animation: lightMove 6s ease-in-out infinite alternate;
+}
+
+/* Maskot utama */
+.maskot-img {
+  position: relative;
+  width: 1000px;
+  left: -10px;
+  bottom: 20px;
+  height: auto;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.6s ease, filter 0.4s ease;
+  animation: glowPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px #8abbd0);
+}
+
+/* Efek hover */
+.maskot-img:hover {
+  transform: scale(1.2) translateY(-25px) rotateZ(2deg);
+  animation: bounceUp 0.6s ease forwards;
+}
+
+/* Animasi tambahan */
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 15px #8abbd0); }
+  50% { filter: drop-shadow(0 0 30px #b9e2ff); }
+}
+
+@keyframes bounceUp {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.25) translateY(-35px); }
+  100% { transform: scale(1.2) translateY(-25px); }
+}
+
+
+
+
+  /* ===== HEADING ===== */
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin: 30px 0 20px;
+  }
+  #countdown-wrapper {
+    text-align: center;
+    margin: 60px auto;
+  }
+
+  #countdown-title {
+    font-size: 55px;
+    color: transparent;                  /* teks transparan */
+    -webkit-text-stroke: 0.5px #ffffff;    /* outline biru */
+    text-shadow: 
+      0 0 8px #3498db,                  /* glow utama */
+      0 0 15px rgba(52,152,219,0.5);    /* glow lembut tambahan */
+  }
+
+  #countdown {
+    font-size: 40px;
+    color: transparent;
+    -webkit-text-stroke: 0.4px #ffffff;
+    text-shadow: 
+      0 0 5px #5dade2,
+      0 0 12px rgba(93,173,226,0.5);
+  }
+
+
+
+
+
+  .lomba-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 kartu di baris pertama */
+    gap: 25px 35px;   /* row-gap 35px, column-gap 25px */
+    justify-items: center; /* biar tiap card center */
+    max-width: 1300px;
+    margin: 0 auto 60px;
+    padding: 20px;
+  }
+  .flip-card {
+    width: 220px;  /* semua kartu ukuran sama */
+    aspect-ratio: 2 / 3;
+  }
+
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transform-style: preserve-3d;
+        border-radius: 18px;
+        border: 4px solid #ffffff;
+        background: linear-gradient(145deg, #d6eaf8, #aed6f1) padding-box,
+                    linear-gradient(145deg, #85c1e9, #5dade2) border-box;
+      }
+
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg) scale(1.05);
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.9),
+                    0 0 70px rgb(255, 255, 255);
+      }
+
+      .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+
+/* === CARD DEPAN BERDASARKAN LOMBA === */
+
+/* SMP/MTs */
+.front-ipa { background: url("img/lomba/ipa.png") center/cover no-repeat; }
+.front-ips { background: url("img/lomba/ips.png") center/cover no-repeat; }
+.front-matematika { background: url("img/lomba/mtk.png") center/cover no-repeat; }
+.front-storytelling { background: url("img/lomba/storytelling.png") center/cover no-repeat; }
+.front-tahfidz { background: url("img/lomba/Tahfidz.png") center/cover no-repeat; }
+.front-tilawah-smp { background: url("img/lomba/tilawatil.png") center/cover no-repeat; }
+
+/* SMA/MA/SMK */
+.front-khitobah { background: url("img/lomba/khitobah.png") center/cover no-repeat; }
+.front-speech { background: url("img/lomba/speech.png") center/cover no-repeat; }
+.front-essay { background: url("img/lomba/Esai.png") center/cover no-repeat; }
+.front-kaligrafi { background: url("img/lomba/kaligrafi.png") center/cover no-repeat; }
+.front-puisi { background: url("img/lomba/puisi.png") center/cover no-repeat; }
+.front-futsal { background: url("img/lomba/Futsal.png") center/cover no-repeat; }
+.front-badminton { background: url("img/lomba/badminton.png") center/cover no-repeat; }
+.front-tilawah-sma { background: url("img/lomba/Tilawatil.png") center/cover no-repeat; }
+
+/* SPECIAL COMPETITION */
+.front-dtiys { 
+  background: url("img/lomba/Dtiys.png") center/cover no-repeat;
+  animation: glowSpecial 3s ease-in-out infinite;
+}
+
+/* Efek tambahan agar teks tetap terlihat di atas gambar */
+.flip-card-front {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.9);
+  border: 2px solid rgba(255,255,255,0.5);
+  overflow: hidden;
+}
+
+
+/* Glow effect khusus DTIYS */
+@keyframes glowSpecial {
+  0%, 100% { box-shadow: 0 0 25px rgba(147,112,219,0.6); }
+  50% { box-shadow: 0 0 50px rgba(37,117,252,0.8); }
+}
+
+
+  .flip-card-back {
+    background-image: url('img/logo/Bg card.png');
+    background-size: cover;       /* biar nutup penuh, walau ada cropping */
+    background-position: center;  /* posisinya ditengah */
+    background-repeat: no-repeat; /* biar ga ngulang */
+    
+    color: #ffffff;
+    transform: rotateY(180deg);
+  }
+
+      .flip-card-back p {
+        font-size: 20PX;
+        margin: 5px 0;
+        line-height: 1.4;
+      }
+
+      .status-lomba {
+        font-size: 15PX;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+  .button-group {
+    display: flex;
+    justify-content: space-between; /* tombol kiri-kanan */
+    align-items: center;
+    width: 100%;
+    margin-top: 14px;
+    gap: 10px; /* beri jarak antar tombol biar lega */
+  }
+
+  .button-group a {
+    flex: 0 0 48%; /* masih proporsional, cukup besar */
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 12px 0; /* lebih tebal */
+    border-radius: 24px;
+    font-size: 1rem; /* teks lebih besar */
+    background: linear-gradient(90deg,#3498db,#5dade2);
+    box-shadow: 0 0 8px rgba(52,152,219,0.6);
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+
+  .button-group a:hover {
+    transform: scale(1.08);
+    background: linear-gradient(90deg,#5dade2,#3498db);
+    color: #000;
+  }
+
+
+
+  /* Wrapper agar tetap center */
+  .section-wrapper {
+    text-align: center;
+    margin: 60px 0 30px;
+  }
+
+  /* Heading kombinasi garis + glow */
+  .section-combo {
+    font-size: 2rem;
+    text-align: center;
+    position: relative;
+    color: #1e293b;
+    letter-spacing: 2px;
+    display: inline-block;
+    padding: 12px 40px;
+    border-radius: 40px;
+
+    /* Glass glow effect */
+    background: linear-gradient(90deg, #ffffff, #eaf6ff);
+    border: 2px solid #b4e1ff;
+    color: #1a3c5a;
+  }
+  .section-combo::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 140px;
+    height: 6px;
+  background: linear-gradient(90deg, #86ceff, #ce9b7d);
+
+      border-radius: 50px; /* kasih lengkungan di ujung */
+  }
+
+
+
+  .section-combo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 140px;
+    height: 6px;
+  background: linear-gradient(90deg, #ce9b7d, #86ceff);
+
+      border-radius: 50px; /* kasih lengkungan di ujung */
+  }
+
+  .section-combo::before {
+    right: 100%;
+    margin-right: 2px;
+  }
+  .section-combo::after {
+    left: 100%;
+    margin-left: 2px;
+  }
+
+
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #203546; /* gelap semi-transparan */
+    backdrop-filter: blur(12px); /* efek kaca */
+    border-top: 2px solid #3498db; /* gold tipis */
+    box-shadow: 0 -4px 25px rgba(52,152,219,0.5); /* glow tipis */
+    padding: 40px 20px 20px;
+    border-radius: 15px 15px 0 0;
+    color: #ffffff; /* teks emas */
+  }
+
+
+
+  .lomba-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    padding: 10px;
+  }
+
+  .footer-info { flex: 1; min-width: 250px;font-size: 19px; }
+  .footer-map { flex: 1; min-width: 300px; display: flex; flex-direction: column; align-items: flex-end; }
+  .footer-info h3, .footer-map h3 { margin-bottom: 15px; color: #ffffff; font-size: 38px; }
+  .footer-info a { color: #ffffff; text-decoration: none; }
+  .footer-info a:hover {
+    color: #5dade2;
+    text-decoration: underline;
+  }
+
+  .map-embed {
+    width: 350px; height: 180px;
+    border: 0; border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+  @media (max-width: 600px) {
+    .footer-container { flex-direction: column; align-items: center; }
+    .footer-map { align-items: center; }
+    .map-embed { width: 100%; height: 160px; }
+  }
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #ffffff;
+    padding-top: 10px;
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  #special-thanks {
+    text-align: center;
+    padding: 160px 20px 250px;  /* section lebih tinggi */
+    max-width: 1600px;          /* section lebih lebar */
+    margin: 50px auto;
+    background: rgba(0,0,0,0.25);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+  }
+
+  #special-thanks .title {
+    font-family: 'Marcellus SC', serif;
+    font-size: 5rem;             /* lebih besar */
+    color: #ffffff;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff;
+  }
+
+  #special-thanks .subtitle {
+    font-size: 2rem;             /* lebih besar */
+    margin-bottom: 80px;
+    color: #cfefff;
+  }
+
+  /* Sponsor grid */
+  .sponsor-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 70px;
+  }
+
+  /* Mobile: pakai grid 1 kolom, 4 baris */
+  @media (max-width: 576px) {
+    .sponsor-logos {
+      display: grid;
+      grid-template-columns: 1fr; /* 1 logo per baris */
+      gap: 20px; /* jarak antar logo */
+    }
+
+    .sponsor-card {
+      width: 100%;       /* penuh lebar container */
+      max-width: 250px;  /* atau sesuaikan */
+      margin: 0 auto;    /* center */
+    }
+  }
+
+  .sponsor-card {
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+    padding: 20px 30px;          /* card lebih tebal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px;            /* card besar */
+    max-width: 450px;
+    height: 250px;               /* tinggi card besar */
+    box-shadow: 0 8px 30px rgba(0, 191, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sponsor-card img {
+    max-height: 100px;           /* logo besar */
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .sponsor-card:hover {
+    transform: scale(1.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    #special-thanks .title { font-size: 4rem; }
+    #special-thanks .subtitle { font-size: 1.8rem; }
+    .sponsor-card { height: 220px; padding: 40px 50px; min-width: 300px; }
+    .sponsor-card img { max-height: 120px; }
+  }
+
+  @media (max-width: 768px) {
+    #special-thanks .title { font-size: 3rem; }
+    #special-thanks .subtitle { font-size: 1.5rem; }
+    .sponsor-card { height: 180px; padding: 35px 40px; min-width: 250px; }
+    .sponsor-card img { max-height: 100px; }
+  }
+
+  @media (max-width: 576px) {
+    #special-thanks .title { font-size: 2.5rem; }
+    #special-thanks .subtitle { font-size: 1.2rem; }
+    .sponsor-card { height: 140px; padding: 25px 30px; min-width: 180px; }
+    .sponsor-card img { max-height: 70px; }
+  }
+
+
+  /* --- Animasi fade-in slide-up --- */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  [data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+
+  /* ================= RESPONSIVE DESIGN ================= */
+
+  /* Tablet dan HP besar */
+  @media (max-width: 992px) {
+    .navbar-title {
+      font-size: 1.4rem;
+    }
+    .logo-navbar {
+      height: 50px;
+    }
+    #countdown-title {
+      font-size: 28px;
+    }
+    #countdown {
+      font-size: 1.8rem;
+    }
+    #progress-bar {
+      width: 80%;
+    }
+  }
+
+  /* HP sedang */
+  @media (max-width: 768px) {
+    .banner-image {
+      margin: 20px auto 40px;
+    }
+    .maskot-container img {
+      width: 160px;
+    }
+    h1 {
+      font-size: 1.6rem;
+    }
+    .flip-card {
+      width: 160px;
+    }
+    .section-combo {
+      font-size: 1.6rem;
+      padding: 10px 20px;
+    }
+    #progress-bar {
+      width: 90%;
+    }
+  }
+
+  /* HP kecil */
+  @media (max-width: 480px) {
+    .navbar-title {
+      font-size: 1.2rem;
+    }
+    #countdown-title {
+      font-size: 22px;
+    }
+    #countdown {
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+    .maskot-container img {
+      width: 130px;
+    }
+    .flip-card {
+      width: 140px;
+    }
+    .section-combo {
+      font-size: 1.4rem;
+      padding: 8px 15px;
+    }
+    #progress-bar {
+      width: 95%;
+      height: 6px;
+    }
+    .footer-info, .footer-map {
+      text-align: center;
+    }
+  }
+
+
+
+  /* ---------- FONT OVERRIDE ---------- */
+
+  /* Global isi teks */
+  body, p, footer, #special-thanks, .sponsor-card {
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  /* Judul / utama */
+  h1, h2, h3, .navbar-title, #countdown-title, .section-combo, #special-thanks .title {
+    font-family: 'Audiowide', cursive !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px;
+  }
+
+  /* Navigasi, tombol, card */
+  nav, .navbar-content, .navbar-content a,
+  .button-group a, .card-title, .status-lomba,
+  .flip-card-front, .flip-card-back h3 {
+    font-family: 'montserrat', sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  </style>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Poppins:wght@300;400;500&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <video autoplay muted playsinline>
+      <source src="video/Comp 2.mp4" type="video/mp4">
+      Browsermu tidak mendukung video.
+    </video>
+  </div>
+
+  <!-- Konten Utama -->
+  <div id="main-content" style="display:none;">
+    <!-- Semua konten webmu di sini -->
+  </div>
+
+
+
+
+    <nav class="navbar">
+      <div class="logo-area">
+        <img src="img/logo/cl.png" alt="Logo">
+        <img src="img/logo/89.png" alt="Classiic Event">
+      </div>
+      <div class="menu">
+        <a href="landing.html">About</a>
+        <a href="#home">Home</a>
+        <a href="#1">SMP/MTs</a>
+        <a href="#2">SMA/MA</a>
+        <a href="#3">Special Competition</a>
+        <a href="#4">Kontak</a>
+      </div>
+    </nav>
+
+
+
+  <div id="home" class="banner-image"><img src="img/logo/WEL.png" alt="Banner Event"></div>
+
+  <div id="about" class="maskot-container">
+    <img src="img/logo/2.png" alt="Maskot" class="maskot-img">
+  </div>
+
+
+  <div id="countdown-wrapper">
+    <div id="countdown-title">Sisa Waktu Pendaftaran</div>
+    <div id="countdown"></div>
+  </div>
+
+
+<!-- ================== SMP/MTs ================== --> 
+<div id="1" class="section-wrapper">
+  <h1 class="section-combo">SMP/MTs</h1>
+</div>
+
+<div class="lomba-container">
+  <!-- Olimpiade IPA -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-ipa"></div>
+      <div class="flip-card-back">
+        <p>Olimpiade IPA</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/PyvtComzacVp54q76">Daftar</a>
+            <a href="juknis/ipa.pdf">Juknis</a>
+          </div>
+          <a href="poster/olim.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Olimpiade IPS -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-ips"></div>
+      <div class="flip-card-back">
+        <p>Olimpiade IPS</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/Jx4AHc1EtNyZZsjL8">Daftar</a>
+            <a href="juknis/ips.pdf">Juknis</a>
+          </div>
+          <a href="poster/olim.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Olimpiade Matematika -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-matematika"></div>
+      <div class="flip-card-back">
+        <p>Olimpiade Matematika</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/8f2YWGDRc33cRM7G8">Daftar</a>
+            <a href="juknis/mtk.pdf">Juknis</a>
+          </div>
+          <a href="poster/olim.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Storytelling -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-storytelling"></div>
+      <div class="flip-card-back">
+        <p>Storytelling</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/1EwCSh6LhQj5XJzUA">Daftar</a>
+            <a href="juknis/story.pdf">Juknis</a>
+          </div>
+          <a href="poster/language.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tahfizh Al-Qur’an -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-tahfidz"></div>
+      <div class="flip-card-back">
+        <p>Tahfizh Al-Qur’an</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/VpzA1BVdQ1P5h4Hb7">Daftar</a>
+            <a href="juknis/tahfidz.pdf">Juknis</a>
+          </div>
+          <a href="poster/islamic.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tilawatil Al-Qur’an -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-tilawah-smp"></div>
+      <div class="flip-card-back">
+        <p>Tilawatil Al-Qur’an</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/KmEnNYNWE2eH5Wc19">Daftar</a>
+            <a href="juknis/tilawah.pdf">Juknis</a>
+          </div>
+          <a href="poster/islamic.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== SMA/MA/SMK ================== -->
+<div id="2" class="section-wrapper">
+  <h1 class="section-combo">SMA/MA/SMK</h1>
+</div>
+
+<div class="lomba-container">
+
+  <!-- Speech -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-speech"></div>
+      <div class="flip-card-back">
+        <p>Speech</p>
+        <p class="status-lomba">(Online)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="#">Daftar</a>
+            <a href="juknis/speech.pdf">Juknis</a>
+          </div>
+          <a href="poster/language.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Khitobah -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-khitobah"></div>
+      <div class="flip-card-back">
+        <p>Khitobah</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/r8qyUu9YxezGa6Tq8">Daftar</a>
+            <a href="juknis/khitobah.pdf">Juknis</a>
+          </div>
+          <a href="poster/language.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Essay -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-essay"></div>
+      <div class="flip-card-back">
+        <p>Essay</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/YdQn2aUg2UopZi869">Daftar</a>
+            <a href="juknis/esai.pdf">Juknis</a>
+          </div>
+          <a href="poster/language.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaligrafi Kontemporer -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-kaligrafi"></div>
+      <div class="flip-card-back">
+        <p>Kaligrafi Kontemporer</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/HFXqBR1HcMa4fs8g8">Daftar</a>
+            <a href="juknis/kaligrafi.pdf">Juknis</a>
+          </div>
+          <a href="poster/art.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Puisi -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-puisi"></div>
+      <div class="flip-card-back">
+        <p>Puisi</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/hmevuZZtQtzUapCH7">Daftar</a>
+            <a href="juknis/puisi.pdf">Juknis</a>
+          </div>
+          <a href="poster/art.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Futsal -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-futsal"></div>
+      <div class="flip-card-back">
+        <p>Futsal</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="#">Daftar</a>
+            <a href="juknis/futsal.pdf">Juknis</a>
+          </div>
+          <a href="poster/sport.jpg" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Badminton -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-badminton"></div>
+      <div class="flip-card-back">
+        <p>Badminton</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="#">Daftar</a>
+            <a href="juknis/badmin.pdf">Juknis</a>
+          </div>
+          <a href="poster/sport.jpg" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tilawatil Al-Qur’an -->
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-tilawah-sma"></div>
+      <div class="flip-card-back">
+        <p>Tilawatil Al-Qur’an</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/ifABiRUSLnNQTTwx7">Daftar</a>
+            <a href="juknis/tilawah.pdf">Juknis</a>
+          </div>
+          <a href="poster/islamic.jpg" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================== SPECIAL COMPETITION ================== -->
+<div id="3" class="section-wrapper">
+  <h1 class="section-combo">SPECIAL COMPETITION</h1>
+</div>
+
+<div class="lomba-container">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front front-dtiys"></div>
+      <div class="flip-card-back">
+        <p>Draw This In Your Style</p>
+        <p class="status-lomba">(Offline)</p>
+        <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
+            <a href="https://forms.gle/h8fD6izAsHJbWw6YA">Daftar</a>
+            <a href="juknis/dtiys.pdf">Juknis</a>
+          </div>
+          <a href="poster/art.pdf" style="width: 75%;">Poster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <section id="special-thanks">
+    <h2 class="title">Special Thanks</h2>
+    <p class="subtitle">Kami berterima kasih kepada sponsor yang telah mendukung acara ini</p>
+
+    <div class="sponsor-logos">
+      <div class="sponsor-card"><img src="img/logo/logo1.jpeg" alt="Sponsor 1"></div>
+      <div class="sponsor-card"><img src="img/logo/logo2.png" alt="Sponsor 2"></div>
+  </section>
+  </section>
+
+
+
+
+
+
+
+  <!-- ================== FOOTER ================== -->
+  <footer>
+    <div class="footer-container">
+      <!-- Kontak di kiri -->
+        <div class="footer-info" id="4"> <!-- kasih id di sini -->
+        <h3>Kontak Kami</h3>
+        <p>Email: 
+          <a href="mailto:classiiciclotim@gmail.com">classiiciclotim@gmail.com</a>
+        </p>
+        <p>Instagram: 
+          <a href="https://www.instagram.com/classiic_iclt/" target="_blank">@classiic_iclt</a>
+        </p>
+        <p>Whatsapp:</p>
+        <a href="https://wa.me/62895411827900" target="_blank">📞 +62 895-4118-27900</a><br>
+        <a href="https://wa.me/6282340754415" target="_blank">📞 +62 823-4075-4415</a><br>
+        <a href="https://wa.me/6287817015749" target="_blank">📞 +62 878-1701-5749</a>
+      </div>
+    </div>
+
+      <!-- Map di kanan -->
+      <div class="footer-map">
+        <h3>Lokasi Sekolah</h3>
+        <iframe 
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.0007177858065!2d116.45522227506197!3d-8.691479991357001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcc4d24d04832c7%3A0x8e831296a6e61960!2sMAN%20Insan%20Cendekia%20Lombok%20Timur!5e0!3m2!1sen!2sid!4v1758245062704!5m2!1sen!2sid" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 CLASSIIC | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loadingScreen = document.getElementById("loading-screen");
+    const mainContent = document.getElementById("main-content");
+    const video = loadingScreen.querySelector("video");
+
+    video.onended = () => {
+      loadingScreen.classList.add("fade-out");
+
+      setTimeout(() => {
+        loadingScreen.style.display = "none";
+        mainContent.style.display = "block";
+      }, 1500); // sesuai durasi animasi fadeOut
+    };
+  });
+
+
+  // Scroll Reveal Cards
+  function revealOnScroll() {
+    document.querySelectorAll('.flip-card').forEach(el => {
+      const boxTop = el.getBoundingClientRect().top;
+      if (boxTop < window.innerHeight * 0.85) el.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll);
+
+  // Countdown
+  const countdownElement = document.getElementById('countdown');
+  const progressInner = document.getElementById('progress-inner');
+  const endTime = new Date("2025-12-12T23:59:59").getTime();
+
+  function updateCountdown(){
+    const now = new Date().getTime();
+    const distance = endTime - now;
+
+    if(distance < 0){
+      // Waktu habis
+      countdownElement.innerHTML = "Pendaftaran Ditutup";
+      progressInner.style.width = "0%";
+      
+      // Style glow merah untuk teks habis
+      countdownElement.style.color = "transparent";
+      countdownElement.style.webkitTextStroke = "2px #ff4d4d";
+      countdownElement.style.textShadow = "0 0 8px #ff4d4d, 0 0 15px rgba(255,77,77,0.5)";
+      return;
+    }
+
+    // Waktu belum habis
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    countdownElement.innerHTML = `${days} : ${hours} : ${minutes} : ${seconds}`;
+
+    const total = endTime - new Date("2025-12-12T00:00:00").getTime();
+    progressInner.style.width = `${Math.floor((distance / total) * 100)}%`;
+
+    // Outline + glow biru
+    countdownElement.style.color = "transparent";
+    countdownElement.style.webkitTextStroke = "2px #3498db";
+    countdownElement.style.textShadow = "0 0 8px #3498db, 0 0 15px rgba(52,152,219,0.5)";
+
+    // 1 hari terakhir: glow merah
+    if(distance < 86400000){
+      countdownElement.style.webkitTextStroke = "2px #ff4d4d";
+      countdownElement.style.textShadow = "0 0 8px #ff4d4d, 0 0 15px rgba(255,77,77,0.5)";
+    }
+  }
+
+  // Jalankan tiap detik
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Animasi scroll masuk (sudah oke)
+  document.addEventListener("DOMContentLoaded", () => {
+    const animatedItems = document.querySelectorAll("[data-animate]");
+    
+    const onScroll = () => {
+      animatedItems.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add("visible");
+        }
+      });
+    };
+    
+    window.addEventListener("scroll", onScroll);
+    onScroll(); // cek pertama kali
+  });
+
+  </script>
+
+  </body>
+  </html>

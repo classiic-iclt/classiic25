@@ -16,7 +16,9 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   /* ===== GLOBAL ===== */
-  body {
+  html, body {
+  overflow-x: hidden;
+  width: 100%;
     margin: 0;
     height: 100vh;
     background: radial-gradient(circle at center, #1b2a4e, #0d0d1a); 
@@ -56,20 +58,21 @@
 
 
 
-  /* ===== NAVBAR ===== */
-      .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 50px;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        z-index: 1000;
-      }
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  box-sizing: border-box; /* penting agar padding tidak meluber */
+}
+
 
       /* Logo + Teks */
       .logo-area {
@@ -99,6 +102,39 @@
         color: #00e0ff;
         text-shadow: 0 0 8px #00e0ff;
       }
+      @media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+  .logo-area img {
+    height: 60px;
+  }
+  .logo-area span {
+    font-size: 20px;
+  }
+  .menu a {
+    margin: 0 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 8px 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+  .menu {
+    margin-top: 5px;
+  }
+  .logo-area img {
+    height: 50px;
+  }
+  .logo-area span {
+    font-size: 18px;
+  }
+}
+
 
   /* ===== BANNER & MASKOT ===== */
   .banner-image {

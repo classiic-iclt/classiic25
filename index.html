@@ -364,29 +364,27 @@
     border: 2px solid #b4e1ff;
     color: #1a3c5a;
   }
-  .section-combo::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 140px;
-    height: 6px;
+.section-combo::before,
+.section-combo::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px; /* kecilkan agar muat di HP */
+  height: 4px;
+  border-radius: 50px;
+}
+
+.section-combo::before {
+  right: calc(100% + 10px);
   background: linear-gradient(90deg, #86ceff, #ce9b7d);
+}
 
-      border-radius: 50px; /* kasih lengkungan di ujung */
-  }
-
-
-
-  .section-combo::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 140px;
-    height: 6px;
+.section-combo::after {
+  left: calc(100% + 10px);
   background: linear-gradient(90deg, #ce9b7d, #86ceff);
+}
 
-      border-radius: 50px; /* kasih lengkungan di ujung */
-  }
 
   .section-combo::before {
     right: 100%;
@@ -775,11 +773,11 @@
       <div class="flip-card-front front-storytelling"></div>
       <div class="flip-card-back">
         <p>Storytelling</p>
-        <p class="status-lomba">(Online)</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
         <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
           <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
             <a href="https://forms.gle/1EwCSh6LhQj5XJzUA">Daftar</a>
-            <a href="juknis/Story.pdf">Juknis</a>
+            <a href="juknis/story.pdf">Juknis</a>
           </div>
           <a href="poster/language.pdf" style="width: 75%;">Poster</a>
         </div>
@@ -855,7 +853,7 @@
       <div class="flip-card-front front-khitobah"></div>
       <div class="flip-card-back">
         <p>Khitobah</p>
-        <p class="status-lomba">(Online)</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
         <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
           <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
             <a href="https://forms.gle/r8qyUu9YxezGa6Tq8">Daftar</a>
@@ -873,7 +871,7 @@
       <div class="flip-card-front front-essay"></div>
       <div class="flip-card-back">
         <p>Essay</p>
-        <p class="status-lomba">(Online)</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
         <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
           <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
             <a href="https://forms.gle/YdQn2aUg2UopZi869">Daftar</a>
@@ -909,7 +907,7 @@
       <div class="flip-card-front front-puisi"></div>
       <div class="flip-card-back">
         <p>Puisi</p>
-        <p class="status-lomba">(Online)</p>
+        <p class="status-lomba">(Online + Final Offline)</p>
         <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
           <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
             <a href="https://forms.gle/hmevuZZtQtzUapCH7">Daftar</a>
@@ -987,7 +985,7 @@
       <div class="flip-card-front front-dtiys"></div>
       <div class="flip-card-back">
         <p>Draw This In Your Style</p>
-        <p class="status-lomba">(Online)</p>
+        <p class="status-lomba">(Offline)</p>
         <div class="button-group" style="flex-direction: column; align-items: center; gap: 8px;">
           <div style="display: flex; justify-content: space-between; width: 100%; gap: 10px;">
             <a href="https://forms.gle/h8fD6izAsHJbWw6YA">Daftar</a>
